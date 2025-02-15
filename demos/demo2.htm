@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:: jQuery Plugin Example ::</title>
+    <style>
+    div {
+        /* border:5px solid grey; */
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000;
+    }
+    </style>
+</head>
+<body>
+
+    <div style="width:280px;height:150px;">&nbsp;</div>
+
+    <script type="text/javascript" src="./jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+    (function($) {
+        
+        $.fn.greenify = function( options ) {
+
+            var divHeight = $( "div" ).height();
+            var divWidth = $( "div" ).width();
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+
+            // This is the easiest way to have default options.
+            var settings = $.extend({
+                // These are the defaults.              
+                color: "#FFFF00",
+                backgroundColor: "#0000FF",
+                borderStyle: "outset",
+                borderWidth: 2,
+                borderColor: "#999",
+                left: ( windowWidth / 2 ) - ( divWidth / 2 ),
+                top: ( windowHeight /2 ) - ( divHeight / 2 )
+            }, options );
+
+            var initialize = {
+                changeColor: function( foreColor, backColor ) { 
+
+                    if ( foreColor != null ) {
+                        settings.color = foreColor;                    
+                    };
+                    
+                    if ( backColor != null ) {
+                        settings.backgroundColor = backColor;                    
+                    };
+
+                    return $( "div" ).css({
+                        color: settings.color,
+                        backgroundColor: settings.backgroundColor
+                    });
+
+                },
+                changeBorder: function( boxStyle, boxWidth, boxColor ) {
+                    if ( boxStyle != null ) {
+                        settings.borderStyle = boxStyle;                    
+                    };
+                    
+                    if ( boxWidth != null ) {
+                        settings.borderWidth = boxWidth;                    
+                    };
+
+                    if ( boxWidth != null ) {
+                        settings.borderColor = boxColor;                    
+                    };
+                    
+                    return $( "div" ).css({
+                        borderStyle: settings.borderStyle,
+                        borderWidth: settings.borderWidth,                
+                        borderColor: settings.borderColor
+                    });
+
+                },
+                changePosition: function(posLeft, posTop) { 
+
+                    if ( posLeft != null ) {
+                        settings.left = posLeft;                    
+                    };
+
+                    if ( posTop != null ) {
+                        settings.top = posTop;                    
+                    };
+                    
+                    return $( "div" ).css({
+                        position: "absolute",
+                        left: settings.left,
+                        top: settings.top
+                    });
+
+                }
+
+            };
+
+            return initialize;
+            
+        };
+
+    }(jQuery));
+
+    /*
+    $( "div" ).greenify({
+        color: "lightgrey",
+        BackgroundColor: "#556b2f"
+    });
+    */
+
+    var boxObject = $( "div" ).greenify();
+    boxObject.changeColor("black", "silver");
+    boxObject.changeBorder("solid", 5, "lime");
+    boxObject.changePosition(100, 100);
+    </script>
+</body>
+</html>

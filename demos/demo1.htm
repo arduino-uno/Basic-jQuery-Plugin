@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:: jQuery Plugin: Call a plugin ::</title>
+</head>
+<body>
+<script type="text/javascript" src="./jquery/jquery.min.js"></script>
+<script>
+(function($) {
+    $.fn.alertMsg = function( options ) {
+        
+        var settings = $.extend({
+            msgText: "Default Message!",
+        }, options);
+        
+        var alerts = {
+            callMe1: function( customMsg ) {
+                
+                if ( customMsg != null ) {
+                    settings.msgText = customMsg;                    
+                };
+
+                alert( customMsg );
+
+            },
+            callMe2: function() {
+                confirm("Press a button!");
+            },
+            callMe3: function() {
+                let person = prompt( "Please enter your name", "Harry Potter" );
+                if ( person != null ) {
+                    alert( "Hello " + person + "! How are you today?" );
+                }
+            }
+        };
+
+        return alerts;
+
+    };
+})(jQuery);
+// set initial properties
+var alerts = $(this).alertMsg();
+alerts.callMe1( "Your name goes here!" );
+$(this).alertMsg().callMe2();
+$(this).alertMsg().callMe3();
+</script>
+</body>
+</html>
